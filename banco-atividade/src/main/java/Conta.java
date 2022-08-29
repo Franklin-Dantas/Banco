@@ -1,5 +1,3 @@
-package user;
-
 public class Conta {
   //Atributos
   private String numeroDaConta;

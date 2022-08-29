@@ -1,7 +1,5 @@
-package env;
-
 import java.util.ArrayList;
-import user.*;
+
 
 public class Banco {
   private ArrayList<Conta> conta;
@@ -44,18 +42,6 @@ public class Banco {
     if (!contaExistente(numeroDaConta)){
       conta.add(new Conta(numeroDaConta, clienteNome, TipoDeConta.Corrente));
     }
-  }
-
-  public static void main(String[] args) {
-    Banco banco = new Banco();
-    banco.criarConta("1234","Geraldao");
-
-    Conta geraldao = new Conta("1234","Geraldao", TipoDeConta.Corrente);
-    System.out.println(geraldao.getSaldo());
-    geraldao.deposito(10000);
-    System.out.println(geraldao.getSaldo());
-    geraldao.saque(500);
-    System.out.println(geraldao.getSaldo());
   }
 
 }
