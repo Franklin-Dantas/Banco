@@ -10,89 +10,77 @@ public class Banco {
     this.accounts = new ArrayList();
   }
 
-  private boolean contaExistente(String accountNumber){
-    if(getConta(accountNumber) == null){
+  private boolean contaExistente(String accountNumber) {
+    if (getConta(accountNumber) == null) {
       return false;
     }
     return true;
   }
 
-  public void realizarDepositoEmConta(double valor, String nConta){
+  public void realizarDepositoEmConta(double valor, String nConta) {
     Conta conta = getConta(nConta);
-    if (conta != null){
+    if (conta != null) {
       conta.deposit(valor);
     }
   }
 
   private Conta getConta(String nConta) {
-    for(Conta conta: accounts){
-      if(conta.getAccountNumber() == nConta){
+    for (Conta conta : accounts) {
+      if (conta.getAccountNumber() == nConta) {
         return conta;
       }
     }
     return null;
   }
 
-  public void realizarSaqueEmConta (double valor, String nConta){
+  public void realizarSaqueEmConta(double valor, String nConta) {
     Conta conta = getConta(nConta);
-    if (conta != null){
+    if (conta != null) {
       conta.withdraw(valor);
     }
   }
 
-  public void criarConta(String accountNumber, String userName){
-    if (!contaExistente(accountNumber)){
+  public void criarConta(String accountNumber, String userName) {
+    if (!contaExistente(accountNumber)) {
       Conta conta = new Conta(accountNumber, userName);
       accounts.add(conta);
     }
   }
 
-  public int getNumeroContas(){
+  public int getNumeroContas() {
     return accounts.size();
   }
 
-  public void SacaComImposto (String nConta, double valor){
-    Conta conta = getConta(nConta);
-    if (conta != null){
-      conta.withdraw(valor-(valor*0.01));
-    }
-  }
-
-  public void depositoComImposto(double valor, String nConta){
-    Conta conta = getConta(nConta);
-    if (conta != null){
-      conta.deposit(valor-(valor*0.01));
-    }
-  }
-
-  public double getTotalDeSaldoBanco(){
+  public double getTotalDeSaldoBanco() {
     double saldo = 0;
-    for(Conta conta: accounts){
+    for (Conta conta : accounts) {
       saldo += conta.getBalance();
     }
     return saldo;
   }
 
-  public boolean removerConta(String numeroConta){
+  public boolean removerConta(String numeroConta) {
     Conta conta = getConta(numeroConta);
-    if (conta != null){
+    if (conta != null) {
       accounts.remove(conta);
       return true;
     }
     return false;
   }
 
-  /*public static void main(String[] args) {
-    Banco bank = new Banco();
-    bank.criarConta("1234","Geraldao");
-    bank.criarConta("12345","Geraldao");
-
-    Conta geraldao = new Conta("1234","Geraldao");
-    System.out.println(geraldao.getBalance());
-    geraldao.deposit(10000);
-    System.out.println(geraldao.getBalance());
-    geraldao.withdraw(500);
-    System.out.println(geraldao.getBalance());
-  }*/
+  /*
+   * public static void main(String[] args) {
+   * Banco bank = new Banco();
+   * bank.criarConta("1234","Geraldao");
+   * bank.criarConta("12345","Geraldao");
+   * 
+   * Conta geraldao = new Conta("1234","Geraldao");
+   * System.out.println(geraldao.getBalance());
+   * geraldao.deposit(10000);
+   * System.out.println(geraldao.getBalance());
+   * geraldao.withdraw(500);
+   * System.out.println(geraldao.getBalance());
+   * }
+   */
 
 }
