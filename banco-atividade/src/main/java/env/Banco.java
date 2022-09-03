@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import user.*;
 
 public class Banco {
-  private ArrayList<Conta> accounts;
+  private ArrayList<Conta> contas;
 
   public Banco() {
-    this.accounts = new ArrayList();
+    this.contas = new ArrayList();
   }
 
-  private boolean contaExistente(String accountNumber) {
-    if (getConta(accountNumber) == null) {
+  private boolean contaExistente(String numeroConta) {
+    if (getConta(numeroConta) == null) {
       return false;
     }
     return true;
@@ -25,36 +25,39 @@ public class Banco {
   }
 
   private Conta getConta(String nConta) {
-    for (Conta conta : accounts) {
-      if (conta.getAccountNumber() == nConta) {
+    for (Conta conta : contas) {
+      if (conta.getNumeroConta() == nConta) {
         return conta;
       }
     }
     return null;
   }
 
-  public void realizarSaqueEmConta(double valor, String nConta) {
+  public void realizarSaqueEmConta (double valor, String nConta){
     Conta conta = getConta(nConta);
-    if (conta != null) {
-      conta.withdraw(valor);
+    if (conta != null){
+      conta.saque(valor);
+    } else {
+      System.out.println("Conta inexistente");
     }
   }
+
 
   public void criarConta(String accountNumber, String userName) {
     if (!contaExistente(accountNumber)) {
       Conta conta = new Conta(accountNumber, userName);
-      accounts.add(conta);
+      contas.add(conta);
     }
   }
 
   public int getNumeroContas() {
-    return accounts.size();
+    return contas.size();
   }
 
-  public double getTotalDeSaldoBanco() {
+  public double consultarSaldoEmConta(String nConta) {
     double saldo = 0;
-    for (Conta conta : accounts) {
-      saldo += conta.getBalance();
+    for (Conta conta : contas) {
+      saldo += conta.getSaldo();
     }
     return saldo;
   }
@@ -62,25 +65,9 @@ public class Banco {
   public boolean removerConta(String numeroConta) {
     Conta conta = getConta(numeroConta);
     if (conta != null) {
-      accounts.remove(conta);
+      contas.remove(conta);
       return true;
     }
     return false;
   }
-
-  /*
-   * public static void main(String[] args) {
-   * Banco bank = new Banco();
-   * bank.criarConta("1234","Geraldao");
-   * bank.criarConta("12345","Geraldao");
-   * 
-   * Conta geraldao = new Conta("1234","Geraldao");
-   * System.out.println(geraldao.getBalance());
-   * geraldao.deposit(10000);
-   * System.out.println(geraldao.getBalance());
-   * geraldao.withdraw(500);
-   * System.out.println(geraldao.getBalance());
-   * }
-   */
-
 }

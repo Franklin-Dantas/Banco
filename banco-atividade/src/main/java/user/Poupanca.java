@@ -7,7 +7,7 @@ public class Poupanca extends Conta{
   }
 
   public void renderJuros(){
-    this.balance += 0.01 * this.balance;
+    this.saldo += 0.01 * this.saldo;
   }
 
 }
